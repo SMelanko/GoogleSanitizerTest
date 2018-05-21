@@ -3,8 +3,8 @@ cmake_minimum_required(VERSION 3.8.2)
 
 project(google-sanitizer-test CXX)
 
-# Organize targets into folders.
-set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+include(cotire)
+include(CxxCompilerOptions)
 
 # Extend a list of directories specifying a search path for CMake modules
 # to be loaded by the the include() or find_package() commands.
