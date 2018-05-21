@@ -2,7 +2,7 @@
 
 [Source](https://github.com/google/sanitizers)
 
-```
+``` bash
 mkdir -p build && cd build
 
 cmake .. -DCMAKE_BUILD_TYPE:STRING=Debug -DENABLE_ASAN=ON
@@ -14,7 +14,7 @@ cmake --build . --config Debug
 
 # [AddressSanitizer](https://github.com/google/sanitizers/wiki/AddressSanitizer)
 
-Use after free case
+Use after free case:
 
 ``` cpp
 int main(int, char* []) {
@@ -25,9 +25,9 @@ int main(int, char* []) {
 }
 ```
 
-The result is
+Result:
 
-```
+``` bash
 vmelanko@smela:~/proj/GoogleSanitizerTest/build$ ./google-sanitizer-test 
 =================================================================
 ==30411==ERROR: AddressSanitizer: heap-use-after-free on address 0x614000000068 at pc 0x562bdc7f18ff bp 0x7fff9fa0c7c0 sp 0x7fff9fa0c7b0
@@ -99,9 +99,9 @@ int main(int argc, char** argv) {
 }
 ```
 
-The result is
+Result:
 
-```
+``` bash
 vmelanko@smela:~/proj/GoogleSanitizerTest/build$ ./google-sanitizer-test 
 xx
 
@@ -143,9 +143,9 @@ int main() {
 }
 ```
 
-The result is
+Result:
 
-```
+``` bash
 vmelanko@smela:~/proj/GoogleSanitizerTest/build$ ./google-sanitizer-test 
 ==================
 WARNING: ThreadSanitizer: data race (pid=30998)
@@ -172,4 +172,3 @@ SUMMARY: ThreadSanitizer: data race /home/vmelanko/proj/GoogleSanitizerTest/Main
 ThreadSanitizer: reported 1 warnings
 
 ```
-
