@@ -17,11 +17,10 @@ cmake --build . --config Debug
 Use after free case:
 
 ``` cpp
-int main(int, char* []) {
+int main(int, char**) {
     int* array = new int[100];
     delete [] array;
-
-    return array[10]; // BOOM!
+    return array[10]; // BOOM
 }
 ```
 
@@ -87,7 +86,7 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
 ``` cpp
 #include <stdio.h>
 
-int main(int argc, char** argv) {
+int main(int, char**) {
     int* a = new int[10];
     a[5] = 0;
 
@@ -124,12 +123,12 @@ SUMMARY: AddressSanitizer: 40 byte(s) leaked in 1 allocation(s).
 
 int Global;
 
-void* Thread1(void* x) {
+void* Thread1(void*) {
     Global++;
     return NULL;
 }
 
-void* Thread2(void* x) {
+void* Thread2(void*) {
     Global--;
     return NULL;
 }
@@ -170,5 +169,5 @@ WARNING: ThreadSanitizer: data race (pid=30998)
 SUMMARY: ThreadSanitizer: data race /home/vmelanko/proj/GoogleSanitizerTest/Main.cpp:13 in Thread2(void*)
 ==================
 ThreadSanitizer: reported 1 warnings
-
 ```
+

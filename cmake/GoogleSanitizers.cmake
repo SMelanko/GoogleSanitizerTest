@@ -31,6 +31,8 @@ if (ENABLE_ASAN)
     # Enables AddressSanitizer, a fast memory error detector. Memory access instructions are
     # instrumented to detect out-of-bounds and use-after-free bugs.
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
+    # Enables detection of use-after-scope errors.
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize-address-use-after-scope")
     # Enables LeakSanitizer, a memory leak detector. This option only matters for linking
     # of executables and the executable is linked against a library that overrides malloc
     # and other allocator functions.
