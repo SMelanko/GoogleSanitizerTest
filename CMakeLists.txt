@@ -9,16 +9,32 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 include(cotire)
 include(CxxCompilerOptions)
+include(ExternalProject)
 
 if (ENABLE_ASAN)
-    set(SRC src/AsanMain.cpp)
+    set(SRC
+        src/Asan.h
+        src/Asan.cpp
+        src/AsanMain.cpp
+    )
 elseif (ENABLE_MSAN)
-    set(SRC src/MsanMain.cpp)
+    set(SRC
+        src/Msan.h
+        src/Msan.cpp
+        src/MsanMain.cpp
+    )
 elseif (ENABLE_TSAN)
-    set(SRC src/TsanMain.cpp)
+    set(SRC
+        src/Tsan.h
+        src/Tsan.cpp
+        src/TsanMain.cpp
+    )
 endif ()
 
 add_executable(${PROJECT_NAME} ${SRC})
 
-include(GoogleSanitizers)
+include(CTest)
+enable_testing()
+add_subdirectory(tests)
 
+include(GoogleSanitizers)
